@@ -1,0 +1,42 @@
+{%extends "core/base.html"%}
+
+{%block title%} Login {%endblock%}
+
+{%block content%}
+
+<div class="max-w-lg mx-auto my-10 bg-white shadow-lg rounded-xl overflow-hidden">
+    <h2 class="text-center text-3xl font-bold text-gray-800 py-6 border-b bg-gray-50">Login</h2>
+
+    <form action="{% url 'core:signup' %}" method="post" class="px-8 py-6">
+        {% csrf_token %}
+        
+
+        <div class="mb-4">
+            <label class="block mb-2 text-gray-700 font-semibold">Username:</label>
+            {{ form.username }}
+        </div>
+
+
+        <div class="mb-4">
+            <label class="block mb-2 text-gray-700 font-semibold">Password:</label>
+            {{ form.password }}
+        </div>
+
+        <button type="submit" 
+            class="w-full px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition duration-300 shadow-md">
+            login
+        </button>
+    </form>
+</div>
+
+{% if form.errors or form.non_field_errors %}
+    <div class="mb-3 p-6 bg-red-100 rounded-xl">
+           {% for field in form %}
+           {{ field.errors }}
+
+           {% endfor %}
+           {{ form.non_field_errors }}
+    </div>
+{% endif %}
+
+{%endblock%}
